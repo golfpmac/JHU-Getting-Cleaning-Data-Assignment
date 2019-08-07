@@ -45,8 +45,13 @@ colnames(combined) = variables_list$V2
 cols_to_del = grep("std|mean", variables_list$V2, ignore.case = TRUE, invert = TRUE)
 combined <- combined[-cols_to_del]
 
-#Label the activity number column 
+#Label the activity number column
 names(combined)[87] = "Labels"
+
+#Label the Activity DF
+names(activity_labels)[2] = "Activity"
+names(activity_labels)[1] = "Number"
+
 
 #convert DF to tibble and move the "Labels" col to the front
 combined = tbl_df(combined)
@@ -56,8 +61,11 @@ combined = select(combined, Labels, everything())
 rm(combined_test, combined_train, variables_list, x_test_df, x_train_df,
     y_test_df, y_train_df, cols_to_del)
 
-#merged_data = merge()
- 
+merged_data = merge(combined, activity_labels, by.x="Labels", by.y = "Number", all = TRUE)
+
+
+merged_data = tbl_df(merged_data)
+merged_data = select(merged_data, Activity, everything()) 
 
 
 
