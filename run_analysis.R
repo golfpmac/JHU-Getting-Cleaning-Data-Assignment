@@ -30,7 +30,7 @@ setwd(paste("C:\\Users\\Patrick\\datasciencecoursera\\Course 3\\Week 3\\",
 
 variables_list = read.table(("features.txt"))
 
-#read activity_labels data
+#read activity labels data
 activity_labels = read.table(("activity_labels.txt"))
 
 #combine variables
