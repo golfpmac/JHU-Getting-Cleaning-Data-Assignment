@@ -51,11 +51,9 @@ combined <- combined[-cols_to_del]
 names(combined)[87] = "Labels"
 names(combined)[88] = "Subjects"
 
-
 #Label the Activity DF
 names(activity_labels)[2] = "Activity"
 names(activity_labels)[1] = "Number"
-
 
 #convert DF to tibble and move the "Labels" col to the front
 combined = tbl_df(combined)
@@ -65,18 +63,18 @@ combined = select(combined, Labels, everything())
 #merge the activties with the existing tibble
 merged_data = merge(combined, activity_labels, by.x="Labels", by.y = "Number", all = TRUE)
 
-
 #convert DF to tibble and move the Activity & Subject cols to the front
 merged_data = tbl_df(merged_data)
 merged_data = select(merged_data, Activity, everything())
 merged_data = merged_data[-2]
 
-#remove extra objects
-rm(combined_test, combined_train, variables_list, x_test_df, x_train_df,
-   y_test_df, y_train_df, cols_to_del, combined)
-
 #Melt the data and create tidy data frame
 melted_data = melt(merged_data, id=c("Subjects","Activity"))
 tidy_data <- dcast(melted_data, Subjects+Activity ~ variable, mean)
 
+#remove extra objects
+rm(combined_test, combined_train, variables_list, x_test_df, x_train_df,
+   y_test_df, y_train_df, cols_to_del, combined, merged_data, activity_labels, 
+   subject_test_df, subject_train_df, melted_data)
 
+write.csv(tidy_data, "tidy_data.csv")
