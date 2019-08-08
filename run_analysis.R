@@ -77,4 +77,6 @@ rm(combined_test, combined_train, variables_list, x_test_df, x_train_df,
    y_test_df, y_train_df, cols_to_del, combined, merged_data, activity_labels, 
    subject_test_df, subject_train_df, melted_data)
 
+#write the tidy data to csv file
 write.csv(tidy_data, "tidy_data.csv")
+
