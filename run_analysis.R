@@ -70,11 +70,11 @@ merged_data = merged_data[-2]
 
 #Melt the data and create tidy data frame
 melted_data = melt(merged_data, id=c("Subjects","Activity"))
-tidy_data <- dcast(melted_data, Subjects+Activity ~ variable, mean)
+tidy_data = dcast(melted_data, Subjects+Activity ~ variable, mean)
 
 #remove extra objects
-rm(combined_test, combined_train, variables_list, x_test_df, x_train_df,
-   y_test_df, y_train_df, cols_to_del, combined, merged_data, activity_labels, 
+ rm(combined_test, combined_train, variables_list, x_test_df, x_train_df,
+   y_test_df, y_train_df, cols_to_del, combined, merged_data, activity_labels,
    subject_test_df, subject_train_df, melted_data)
 
 #write the tidy data to csv file
